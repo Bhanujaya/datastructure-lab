@@ -60,7 +60,6 @@ struct Node* leftRotate(struct Node* x) {
 
     return y;
 }
-
 struct Node* insert(struct Node* node, int key) {
     if (node == NULL)
         return newNode(key);
@@ -88,6 +87,16 @@ struct Node* insert(struct Node* node, int key) {
     if (balance < -1 && key < node->right->key) {
         node->right = rightRotate(node->right);
         return leftRotate(node);
+    }
+
+    // Left-Left Case
+    if (balance > 1 && key < node->left->key)
+        return rightRotate(node);
+
+    // Left-Right Case
+    if (balance > 1 && key > node->left->key) {
+        node->left = leftRotate(node->left);
+        return rightRotate(node);
     }
 
     return node;

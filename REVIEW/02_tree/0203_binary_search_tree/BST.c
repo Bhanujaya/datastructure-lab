@@ -161,12 +161,12 @@ void treeDelete(struct node * node) {
             y->right = node->right;
             y->right->parent = y;
         }
+        y->parent = node->parent;  // Correct the parent pointer
         transplant(node, y);
         y->left = node->left;
         y->left->parent = y;
     }
     free(node);
-    
 }
 
 
@@ -187,13 +187,21 @@ int main() {
     struct node* root = NULL; // Initialize an empty tree
 
     // Insert some nodes into the tree
-    root = treeInsert(5, root);
-    treeInsert(3, root);
-    treeInsert(8, root);
-    treeInsert(2, root);
-    treeInsert(4, root);
-    treeInsert(7, root);
-    treeInsert(9, root);
+    root = treeInsert(70, root);
+    treeInsert(15, root);
+    treeInsert(90, root);
+    treeInsert(10, root);
+    treeInsert(25, root);
+    treeInsert(5, root);
+    treeInsert(14, root);
+    treeInsert(80, root);
+    treeInsert(92, root);
+    treeInsert(91, root);
+    treeInsert(99, root);
+
+
+
+
 
     // Print the tree structure
     printf("Tree structure before removal:\n");
@@ -208,12 +216,17 @@ int main() {
     }
 
     // Delete a node (e.g., node with key 3)
-    struct node* nodeToDelete = search(3, root);
+    struct node* nodeToDelete = search(25, root);
+    struct node* nodeToDelete3 = search(15, root);
+
     if (nodeToDelete) {
         treeDelete(nodeToDelete);
-        printf("Deleted node with key 3\n");
+        treeDelete(nodeToDelete3);
+
+
+        printf("Deleted node with key 25\n");
     } else {
-        printf("Node with key 3 not found\n");
+        printf("Node with key  25 not found\n");
     }
 
     // Print the tree structure after removal
